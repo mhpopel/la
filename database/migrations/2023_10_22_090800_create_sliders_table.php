@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slider_img');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->integer('status')->default(1);
+            $table->integer('status')->default(1)->nullable();
             $table->timestamps();
         });
     }
