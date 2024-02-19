@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <h5>Category Name Bangla<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  name="category_name_ban" class="form-control" value="{{ $category->category_name_ban }}" required=""
+                                        <input type="text"  name="category_name_ban" class="form-control" value="{{ $category->category_name_ban }}"
                                         >
                                         @error('category_name_ban')
                                         <span class="text-danger">{{ $message }}</span>
@@ -53,7 +53,7 @@
                                 <div class="form-group">
                                     <h5>Category Icon <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text" name="category_icon" class="form-control"  value="{{ $category->category_icon }}" required=""
+                                        <input type="text" name="category_icon" class="form-control"  value="{{ $category->category_icon }}"
                                         >
                                         @error('category_icon')
                                         <span class="text-danger">{{ $message }}</span>

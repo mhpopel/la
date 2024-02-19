@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <h5>Brand Name Bangla<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  name="brand_name_ban" class="form-control" required=""
+                                        <input type="text"  name="brand_name_ban" class="form-control"
                                         >
                                         @error('brand_name_ban')
                                         <span class="text-danger">{{ $message }}</span>
@@ -93,7 +93,7 @@
                                 <div class="form-group">
                                     <h5>Brand Image <span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="file" name="brand_image" class="form-control" required=""
+                                        <input type="file" name="brand_image" class="form-control"
                                         >
                                         @error('brand_image')
                                         <span class="text-danger">{{ $message }}</span>

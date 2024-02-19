@@ -7,7 +7,7 @@
           <div class="cnt-account">
             <ul class="list-unstyled">
               <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>My Account</a></li>
-              <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+              {{-- <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li> --}}
               <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
               @auth
@@ -22,14 +22,14 @@
 
           <div class="cnt-block">
             <ul class="list-unstyled list-inline">
-              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+              {{-- <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">USD</a></li>
                   <li><a href="#">INR</a></li>
                   <li><a href="#">GBP</a></li>
                 </ul>
-              </li>
-              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Language </span><b class="caret"></b></a>
+              </li> --}}
+              {{-- <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Language </span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   @if(session()->get('language') == 'bangla')
                   <li><a href="{{ route('english.language') }}">English</a></li>
@@ -37,7 +37,7 @@
                   <li><a href="{{ route('bangla.language') }}">বাংলা</a></li>
                    @endif
                 </ul>
-              </li>
+              </li> --}}
             </ul>
             <!-- /.list-unstyled -->
           </div>
@@ -66,7 +66,7 @@
             <div class="search-area">
               <form>
                 <div class="control-group">
-                  <ul class="categories-filter animate-dropdown">
+                  {{-- <ul class="categories-filter animate-dropdown">
                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
                       <ul class="dropdown-menu" role="menu" >
                         <li class="menu-header">Computer</li>
@@ -76,7 +76,7 @@
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Watches</a></li>
                       </ul>
                     </li>
-                  </ul>
+                  </ul> --}}
                   <input class="search-field" placeholder="Search here..." />
                   <a class="search-button" href="#" ></a> </div>
               </form>
@@ -146,28 +146,24 @@
                     @endphp
 
                     @foreach($categories as $category)
-                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $category->category_name_en }}</a>
+                  <li class="dropdown yamm mega-menu">
+                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $category->category_name_en }}</a>
+
+                  </li>
+                  @endforeach
+
+                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">BRANDS</a>
                     <ul class="dropdown-menu container">
                       <li>
                         <div class="yamm-content ">
                           <div class="row">
                             @php
-                                $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
+                                $brands = App\Models\Brand::all();
                             @endphp
 
-                            @foreach($subcategories as $subcategory)
+                            @foreach($brands as $brand)
                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                              <h2 class="title">{{ $subcategory->subcategory_name_en }}</h2>
-
-                              @php
-                                $childSubCategories = App\Models\ChildSubCategory::where('subcategory_id',$subcategory->id)->orderBy('childCategory_name_en','ASC')->get();
-                            @endphp
-
-                              <ul class="links">
-                                @foreach($childSubCategories as $childCategory)
-                                <li><a href="#">{{ $childCategory->childCategory_name_en }}</a></li>
-                                @endforeach
-                              </ul>
+                              <h2 class="title">{{ $brand->brand_name_en }}</h2>
                             </div>
                             @endforeach
                             <!-- /.col -->
@@ -181,7 +177,6 @@
                       </li>
                     </ul>
                   </li>
-                  @endforeach
 
 
                   <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>

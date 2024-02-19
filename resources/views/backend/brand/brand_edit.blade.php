@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <h5>Brand Name Bangla<span class="text-danger">*</span></h5>
                                     <div class="controls">
-                                        <input type="text"  name="brand_name_ban" class="form-control" value="{{ $brand->brand_name_ban }}" required=""
+                                        <input type="text"  name="brand_name_ban" class="form-control" value="{{ $brand->brand_name_ban }}"
                                         >
                                         @error('brand_name_ban')
                                         <span class="text-danger">{{ $message }}</span>

@@ -16,11 +16,11 @@ class CategoryController extends Controller
     public function CategoryStore(Request $request){
         $request->validate([
             'category_name_en' => 'required',
-            'category_name_ban' => 'required',
-            'category_icon' => 'required'
+            // 'category_name_ban' => 'required',
+            // 'category_icon' => 'required'
         ],[
-            'category_name_en.required' => 'Input Category English Name required',
-            'category_name_ban.required' => 'Input Category Bangla Name required'
+            // 'category_name_en.required' => 'Input Category English Name required',
+            // 'category_name_ban.required' => 'Input Category Bangla Name required'
         ]);
 
 

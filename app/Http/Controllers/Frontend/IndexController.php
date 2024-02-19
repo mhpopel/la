@@ -63,7 +63,10 @@ class IndexController extends Controller
         }
 
         $skip_category_one = Category::skip(1)->first();
-        $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
+        $skip_product_one = [];
+        if($skip_category_one){
+            $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
+        }
 
         // dd($special_deal);
         // $special_deal = [];
