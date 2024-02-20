@@ -233,11 +233,11 @@
                             <div class="controls">
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_2" value="1" name="hot_deals">
-                                    <label for="checkbox_2">Hot Deals</label>
+                                    <label for="checkbox_2">New Arrival</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_3" value="1" name="featured">
-                                    <label for="checkbox_3">Featured</label>
+                                    <label for="checkbox_3">Exclusive</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_4" value="1" name="status" >

@@ -17,7 +17,7 @@ Online Shop
           <!-- ================================== TOP NAVIGATION : END ================================== -->
 
           <!-- ============================================== HOT DEALS ============================================== -->
-            @include('frontend.common.hot_deals')
+            {{-- @include('frontend.common.hot_deals') --}}
           <!-- ============================================== HOT DEALS: END ============================================== -->
 
           <!-- ============================================== SPECIAL OFFER ============================================== -->
@@ -87,7 +87,7 @@ Online Shop
           <!-- ============================================== PRODUCT TAGS : END ============================================== -->
           <!-- ============================================== SPECIAL DEALS ============================================== -->
 
-          <div class="sidebar-widget outer-bottom-small wow fadeInUp">
+          {{-- <div class="sidebar-widget outer-bottom-small wow fadeInUp">
             <h3 class="section-title">Special Deals</h3>
             <div class="sidebar-widget-body outer-top-xs">
               <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -139,7 +139,7 @@ Online Shop
               </div>
             </div>
             <!-- /.sidebar-widget-body -->
-          </div>
+          </div> --}}
           <!-- /.sidebar-widget -->
           <!-- ============================================== SPECIAL DEALS : END ============================================== -->
           <!-- ============================================== NEWSLETTER ============================================== -->
@@ -457,10 +457,9 @@ Online Shop
           <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
           <!-- ============================================== FEATURED PRODUCTS ============================================== -->
           <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">Featured products</h3>
+            <h3 class="section-title">{{ $newArrival }} products</h3>
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                @foreach($products as $product)
-                @if($product->featured == 1)
+                @foreach($newArrivalProducts as $product)
               <div class="item item-carousel">
                 <div class="products">
                   <div class="product">
@@ -515,7 +514,7 @@ Online Shop
                 </div>
                 <!-- /.products -->
               </div>
-              @endif
+
               @endforeach
               <!-- /.item -->
               <!-- /.item -->
@@ -525,9 +524,9 @@ Online Shop
 
 
           <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">Electronics products</h3>
+            <h3 class="section-title">{{ $exclusive }} products</h3>
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                @foreach($skip_product_one as $product)
+                @foreach($exclusiveProducts as $product)
 
               <div class="item item-carousel">
                 <div class="products">

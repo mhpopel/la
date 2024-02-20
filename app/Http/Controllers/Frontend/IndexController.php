@@ -62,16 +62,31 @@ class IndexController extends Controller
             $index1++;
         }
 
-        $skip_category_one = Category::skip(1)->first();
-        $skip_product_one = [];
-        if($skip_category_one){
-            $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
-        }
+        // $skip_category_one = Category::skip(1)->first();
+        // $skip_product_one = [];
+        // if($skip_category_one){
+        //     $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
+        // }
 
         // dd($special_deal);
         // $special_deal = [];
         // $special_offer = [];
-        return view('frontend.index',compact('categories','sliders','products','special_offer','special_deal','skip_product_one'));
+
+
+
+        // new arrival/hot_deals + exclusive/featured
+           $newArrivalProducts = Product::where('status',1)->where('hot_deals',1)->take(4)->get();
+           $newArrival = 'New Arrival';
+
+           $exclusiveProducts = Product::where('status',1)->where('featured',1)->take(4)->get();
+           $exclusive = 'Exclusive';
+
+
+
+
+
+        return view('frontend.index',compact('categories','sliders','products','special_offer','special_deal',
+                'newArrivalProducts','newArrival','exclusiveProducts','exclusive'));
     }
 
     public function UserLogout(){
@@ -205,7 +220,7 @@ class IndexController extends Controller
             ->orWhere('product_color_en', 'like', '%' . $query . '%')
             ->paginate(10);
 
-            $categories = Category::orderBy('category_name_en','ASC')->get();
-            return view('frontend.product.subcategory_view',compact('products','categories','query'));
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.subcategory_view',compact('products','categories','query'));
     }
 }
