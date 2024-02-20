@@ -14,7 +14,7 @@ Tag Wise Product
       <div class="breadcrumb-inner">
         <ul class="list-inline list-unstyled">
           <li><a href="#">Home</a></li>
-          <li class='active'>Handbags</li>
+          <li class='active'>Products</li>
         </ul>
       </div>
       <!-- /.breadcrumb-inner -->
@@ -33,7 +33,13 @@ Tag Wise Product
           <div class="sidebar-module-container">
             <div class="sidebar-filter">
               <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
-              <div class="sidebar-widget wow fadeInUp">
+
+
+
+
+
+
+              {{-- <div class="sidebar-widget wow fadeInUp">
                 <h3 class="section-title">shop by</h3>
                 <div class="widget-header">
                   <h4 class="widget-title">Category</h4>
@@ -77,12 +83,12 @@ Tag Wise Product
                   <!-- /.accordion -->
                 </div>
                 <!-- /.sidebar-widget-body -->
-              </div>
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
 
               <!-- ============================================== PRICE SILDER============================================== -->
-              <div class="sidebar-widget wow fadeInUp">
+              {{-- <div class="sidebar-widget wow fadeInUp">
                 <div class="widget-header">
                   <h4 class="widget-title">Price Slider</h4>
                 </div>
@@ -94,11 +100,11 @@ Tag Wise Product
                   <!-- /.price-range-holder -->
                   <a href="#" class="lnk btn btn-primary">Show Now</a> </div>
                 <!-- /.sidebar-widget-body -->
-              </div>
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== PRICE SILDER : END ============================================== -->
               <!-- ============================================== MANUFACTURES============================================== -->
-              <div class="sidebar-widget wow fadeInUp">
+              {{-- <div class="sidebar-widget wow fadeInUp">
                 <div class="widget-header">
                   <h4 class="widget-title">Manufactures</h4>
                 </div>
@@ -114,11 +120,11 @@ Tag Wise Product
                   <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
                 </div>
                 <!-- /.sidebar-widget-body -->
-              </div>
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== MANUFACTURES: END ============================================== -->
               <!-- ============================================== COLOR============================================== -->
-              <div class="sidebar-widget wow fadeInUp">
+              {{-- <div class="sidebar-widget wow fadeInUp">
                 <div class="widget-header">
                   <h4 class="widget-title">Colors</h4>
                 </div>
@@ -133,11 +139,11 @@ Tag Wise Product
                   </ul>
                 </div>
                 <!-- /.sidebar-widget-body -->
-              </div>
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== COLOR: END ============================================== -->
               <!-- ============================================== COMPARE============================================== -->
-              <div class="sidebar-widget wow fadeInUp outer-top-vs">
+              {{-- <div class="sidebar-widget wow fadeInUp outer-top-vs">
                 <h3 class="section-title">Compare products</h3>
                 <div class="sidebar-widget-body">
                   <div class="compare-report">
@@ -146,7 +152,7 @@ Tag Wise Product
                   <!-- /.compare-report -->
                 </div>
                 <!-- /.sidebar-widget-body -->
-              </div>
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== COMPARE: END ============================================== -->
               <!-- ============================================== PRODUCT TAGS ============================================== -->
@@ -175,9 +181,9 @@ Tag Wise Product
               <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive"> </div>
               <div class="container-fluid">
                 <div class="caption vertical-top text-left">
-                  <div class="big-text"> Big Sale </div>
+                  {{-- <div class="big-text"> Big Sale </div>
                   <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                  <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
+                  <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div> --}}
                 </div>
                 <!-- /.caption -->
               </div>
@@ -200,7 +206,7 @@ Tag Wise Product
               <!-- /.col -->
               <div class="col col-sm-12 col-md-6">
                 <div class="col col-sm-3 col-md-6 no-padding">
-                  <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                  {{-- <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                     <div class="fld inline">
                       <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                         <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
@@ -213,12 +219,12 @@ Tag Wise Product
                       </div>
                     </div>
                     <!-- /.fld -->
-                  </div>
+                  </div> --}}
                   <!-- /.lbl-cnt -->
                 </div>
                 <!-- /.col -->
                 <div class="col col-sm-3 col-md-6 no-padding">
-                  <div class="lbl-cnt"> <span class="lbl">Show</span>
+                  {{-- <div class="lbl-cnt"> <span class="lbl">Show</span>
                     <div class="fld inline">
                       <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                         <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
@@ -237,7 +243,7 @@ Tag Wise Product
                       </div>
                     </div>
                     <!-- /.fld -->
-                  </div>
+                  </div> --}}
                   <!-- /.lbl-cnt -->
                 </div>
                 <!-- /.col -->
@@ -255,7 +261,10 @@ Tag Wise Product
               <div class="tab-pane active " id="grid-container">
                 <div class="category-product">
                   <div class="row">
+                    @php
+                    $prodCount = count($products)
 
+                    @endphp
 
 
                     @foreach($products as $product)
@@ -318,6 +327,11 @@ Tag Wise Product
 
 
                     <!-- /.item -->
+                    @if($prodCount  == 0)
+                    <div class="col-sm-12 col-md-12 wow fadeInUp">
+                        <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
+                    </div>
+                    @endif
                   </div>
                   <!-- /.row -->
                 </div>
@@ -393,7 +407,11 @@ Tag Wise Product
                   <!-- /.category-product-inner -->
 
                   @endforeach
-
+                  @if($prodCount  == 0)
+                  <div class="col-sm-12 col-md-12 wow fadeInUp">
+                      <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
+                  </div>
+                  @endif
                 </div>
                 <!-- /.category-product -->
               </div>
@@ -422,44 +440,7 @@ Tag Wise Product
       </div>
       <!-- /.row -->
       <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-      <div id="brands-carousel" class="logo-slider wow fadeInUp">
-        <div class="logo-slider-inner">
-          <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-            <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
 
-            <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-
-            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
-            <!--/.item-->
-          </div>
-          <!-- /.owl-carousel #logo-slider -->
-        </div>
-        <!-- /.logo-slider-inner -->
-
-      </div>
       <!-- /.logo-slider -->
       <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
     <!-- /.container -->

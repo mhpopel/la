@@ -10,7 +10,9 @@ use Auth;
 class WishlistController extends Controller
 {
     public function viewWishlist(){
-        return view('frontend.wishlist.view_wishlist');
+        $wishlist = Wishlist::with('product')->where('user_id',Auth::id())->latest()->get();
+
+        return view('frontend.wishlist.view_wishlist',compact('wishlist'));
     }
 
     public function GetWishlistProduct(){

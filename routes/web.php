@@ -164,8 +164,9 @@ Route::get('/language/bangla',[LanguageController::class, 'bangla'])->name('bang
 Route::get('/language/english',[LanguageController::class, 'english'])->name('english.language');
 Route::get('/product/details/{id}/{slug}',[IndexController::class, 'productDetail']);
 Route::get('/product/details/{tag}',[IndexController::class, 'tagWiseProduct']);
-Route::get('/subcategory/product/{sub_cat_id}/{slug}',[IndexController::class, 'subCatWiseProduct']);
-Route::get('/child_subcategory/product/{child_sub_cat_id}/{slug}',[IndexController::class, 'childCatWiseProduct']);
+Route::get('/category/product/{cat_id}/{slug}',[IndexController::class, 'CatWiseProduct']);
+Route::get('/get/all-products',[IndexController::class, 'GetAllProducts']);
+Route::get('/brand/product/{brand_id}/{slug}',[IndexController::class, 'BrandWiseProduct']);
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/product/mini/cart', [CartController::class, 'addMiniCart']);
@@ -184,6 +185,7 @@ Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'Use
 
 });
 Route::get('/user/product/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
+Route::get('/user/product/search', [IndexController::class, 'SearchProduct'])->name('search');
 Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
 Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
 Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);

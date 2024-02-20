@@ -40,7 +40,7 @@
 
 
                                 <div class="form-group">
-                                    <h5>Brand Name Bangla<span class="text-danger">*</span></h5>
+                                    <h5>Brand Name Bangla</h5>
                                     <div class="controls">
                                         <input type="text"  name="brand_name_ban" class="form-control" value="{{ $brand->brand_name_ban }}"
                                         >
@@ -52,7 +52,7 @@
 
 
                                 <div class="form-group">
-                                    <h5>Brand Image <span class="text-danger">*</span></h5>
+                                    <h5>Brand Image </h5>
                                     <div class="controls">
                                         <input type="file" name="brand_image" class="form-control"
                                         >

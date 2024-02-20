@@ -7,7 +7,7 @@
           <div class="cnt-account">
             <ul class="list-unstyled">
               <li><a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>My Account</a></li>
-              {{-- <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li> --}}
+              <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
               <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
               @auth
@@ -64,7 +64,8 @@
             <!-- /.contact-row -->
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-              <form>
+
+              <form action="{{ route('search') }}" method="GET">
                 <div class="control-group">
                   {{-- <ul class="categories-filter animate-dropdown">
                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
@@ -77,8 +78,9 @@
                       </ul>
                     </li>
                   </ul> --}}
-                  <input class="search-field" placeholder="Search here..." />
-                  <a class="search-button" href="#" ></a> </div>
+                  <input class="search-field" placeholder="Search here..." name="query" value="{{ isset($query)?$query:'' }}"/>
+                  <button type="submit" class="search-button" ></button>
+                </div>
               </form>
             </div>
             <!-- /.search-area -->
@@ -140,14 +142,17 @@
             <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
               <div class="nav-outer">
                 <ul class="nav navbar-nav">
-                  <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                  <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" >Home</a> </li>
                     @php
                         $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
                     @endphp
+                  <li class="dropdown yamm mega-menu">
+                    <a href="{{ url('get/all-products') }}">ALL PRODUCTS</a>
 
+                  </li>
                     @foreach($categories as $category)
                   <li class="dropdown yamm mega-menu">
-                    <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">{{ $category->category_name_en }}</a>
+                    <a href="{{ url('category/product/'.$category->id.'/'.$category->category_slug_en) }}">{{ $category->category_name_en }}</a>
 
                   </li>
                   @endforeach
@@ -163,7 +168,7 @@
 
                             @foreach($brands as $brand)
                             <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                              <h2 class="title">{{ $brand->brand_name_en }}</h2>
+                              <a href="{{ url('brand/product/'.$brand->id.'/'.$brand->brand_slug_en) }}" class="title">{{ $brand->brand_name_en }}</a>
                             </div>
                             @endforeach
                             <!-- /.col -->

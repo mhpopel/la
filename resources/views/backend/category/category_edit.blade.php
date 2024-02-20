@@ -39,7 +39,7 @@
 
 
                                 <div class="form-group">
-                                    <h5>Category Name Bangla<span class="text-danger">*</span></h5>
+                                    <h5>Category Name Bangla</h5>
                                     <div class="controls">
                                         <input type="text"  name="category_name_ban" class="form-control" value="{{ $category->category_name_ban }}"
                                         >
@@ -51,7 +51,7 @@
 
 
                                 <div class="form-group">
-                                    <h5>Category Icon <span class="text-danger">*</span></h5>
+                                    <h5>Category Icon </h5>
                                     <div class="controls">
                                         <input type="text" name="category_icon" class="form-control"  value="{{ $category->category_icon }}"
                                         >

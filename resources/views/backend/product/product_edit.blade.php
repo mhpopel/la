@@ -24,9 +24,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Brand Select <span class="text-danger">*</span></h5>
+                                <h5>Brand Select </h5>
                                 <div class="controls">
-                                    <select name="brand_id" id="select" required="" class="form-control" >
+                                    <select name="brand_id" id="select"  class="form-control" >
                                         <option selected disabled>Select Brand</option>
                                         @foreach($brands as $brand)
                                         <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id?'selected':'' }}>{{ $brand->brand_name_en }}</option>
@@ -37,9 +37,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Category Select <span class="text-danger">*</span></h5>
+                                <h5>Category Select </h5>
                                 <div class="controls">
-                                    <select name="category_id" id="select" required="" class="form-control" >
+                                    <select name="category_id" id="select"  class="form-control" >
                                         <option value="" selected="" disabled>Select Category</option>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ $category->id == $product->category_id?'selected':'' }}>{{ $category->category_name_en }}</option>
@@ -50,9 +50,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Sub Category Select <span class="text-danger">*</span></h5>
+                                <h5>Sub Category Select </h5>
                                 <div class="controls">
-                                    <select name="subcategory_id" id="select" required="" class="form-control" >
+                                    <select name="subcategory_id" id="select"  class="form-control" >
                                         <option value="" selected="" disabled>Select SubCategory</option>
                                         @foreach($subcategories as $subcategory)
                                         <option value="{{ $subcategory->id }}" {{ $subcategory->id == $product->subcategory_id?'selected':''  }}>{{ $subcategory->subcategory_name_en }}</option>
@@ -65,9 +65,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Child Sub Category Select <span class="text-danger">*</span></h5>
+                                <h5>Child Sub Category Select </h5>
                                 <div class="controls">
-                                    <select name="childSubcategory_id" id="select" required="" class="form-control" >
+                                    <select name="childSubcategory_id" id="select"  class="form-control" >
                                         <option selected disabled>Select Child Sub Category</option>
                                         @foreach($childSubcategories as $cSubcategory)
                                         <option value="{{ $cSubcategory->id }}" {{ $cSubcategory->id == $product->childSubcategory_id?'selected':''  }}>{{ $cSubcategory->childCategory_name_en }}</option>
@@ -78,23 +78,23 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Name En <span class="text-danger">*</span></h5>
+                                <h5>Product Name En </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_en" value="{{ $product->product_name_en }}" class="form-control" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="product_name_en" value="{{ $product->product_name_en }}" class="form-control" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Name Bn <span class="text-danger">*</span></h5>
+                                <h5>Product Name Bn </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_bn" value={{ $product->product_name_bn }} class="form-control" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="product_name_bn" value={{ $product->product_name_bn }} class="form-control" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Code <span class="text-danger">*</span></h5>
+                                <h5>Product Code </h5>
                                 <div class="controls">
                                     <input type="text" name="product_code" class="form-control" value={{ $product->product_code }} required data-validation-required-message="This field is required">
                                 </div>
@@ -102,17 +102,17 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Quantity <span class="text-danger">*</span></h5>
+                                <h5>Product Quantity </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_qty" value="{{ $product->product_qty }}" class="form-control" required data-validation-required-message="This field is required">
+                                    <input type="text" name="product_qty" value="{{ $product->product_qty }}" class="form-control" data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Tags En <span class="text-danger">*</span></h5>
+                                <h5>Product Tags En </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_tags_en" class="form-control" value="{{ $product->product_tags_en }}" data-role="tagsinput" required data-validation-required-message="This field is required">
+                                    <input type="text" name="product_tags_en" class="form-control" value="{{ $product->product_tags_en }}" data-role="tagsinput" data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
@@ -120,41 +120,41 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Tags Bn <span class="text-danger">*</span></h5>
+                                <h5>Product Tags Bn </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_tags_bn" class="form-control" value="{{ $product->product_tags_bn }}" data-role="tagsinput" required data-validation-required-message="This field is required">
+                                    <input type="text" name="product_tags_bn" class="form-control" value="{{ $product->product_tags_bn }}" data-role="tagsinput" data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Size En <span class="text-danger">*</span></h5>
+                                <h5>Product Size En </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_size_en" class="form-control" value="{{ $product->product_size_en }}" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="product_size_en" class="form-control" value="{{ $product->product_size_en }}" data-role="tagsinput" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Size Bn <span class="text-danger">*</span></h5>
+                                <h5>Product Size Bn </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_size_bn" class="form-control" value="{{ $product->product_size_bn }}" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="product_size_bn" class="form-control" value="{{ $product->product_size_bn }}" data-role="tagsinput" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Product Color En<span class="text-danger">*</span></h5>
+                                <h5>Product Color En</h5>
                                 <div class="controls">
-                                    <input type="text" name="product_color_en" class="form-control" value="{{ $product->product_color_en }}" data-role="tagsinput" required data-validation-required-message="This field is required">
+                                    <input type="text" name="product_color_en" class="form-control" value="{{ $product->product_color_en }}" data-role="tagsinput" data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Product Color Bn <span class="text-danger">*</span></h5>
+                                <h5>Product Color Bn </h5>
                                 <div class="controls">
-                                    <input type="text" name="product_color_bn" class="form-control" value="{{ $product->product_color_bn }}" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="product_color_bn" class="form-control" value="{{ $product->product_color_bn }}" data-role="tagsinput" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
 
@@ -162,14 +162,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                <h5>Product Selling Price </h5>
                                 <div class="controls">
-                                    <input type="text" name="selling_price" value={{ $product->selling_price }} class="form-control" required data-validation-required-message="This field is required"> </div>
+                                    <input type="text" name="selling_price" value={{ $product->selling_price }} class="form-control" data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Product Discount Price<span class="text-danger">*</span></h5>
+                                <h5>Product Discount Price</h5>
                                 <div class="controls">
                                     <input type="text" name="discount_price" value={{ $product->discount_price }} class="form-control"  >
                                 </div>
@@ -180,17 +180,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Short Description En<span class="text-danger">*</span></h5>
+                                <h5>Short Description En</h5>
                                 <div class="controls">
-                                    <textarea type="text" name="short_descp_en" class="form-control" required data-validation-required-message="This field is required">{!! $product->short_descp_en !!}</textarea>
+                                    <textarea type="text" name="short_descp_en" class="form-control" data-validation-required-message="This field is required">{!! $product->short_descp_en !!}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Short Description Bn <span class="text-danger">*</span></h5>
+                                <h5>Short Description Bn </h5>
                                 <div class="controls">
-                                    <textarea type="text" name="short_descp_bn" class="form-control" required data-validation-required-message="This field is required">{!! $product->short_descp_bn !!}</textarea>
+                                    <textarea type="text" name="short_descp_bn" class="form-control" data-validation-required-message="This field is required">{!! $product->short_descp_bn !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -198,17 +198,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Long Description En<span class="text-danger">*</span></h5>
+                                <h5>Long Description En</h5>
                                 <div class="controls">
-                                    <textarea type="text" id="editor1" name="long_descp_en" class="form-control" required data-validation-required-message="This field is required">{!! $product->long_descp_en !!}</textarea>
+                                    <textarea type="text" id="editor1" name="long_descp_en" class="form-control" data-validation-required-message="This field is required">{!! $product->long_descp_en !!}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Long Description Bn <span class="text-danger">*</span></h5>
+                                <h5>Long Description Bn </h5>
                                 <div class="controls">
-                                    <textarea type="text" id="editor2" name="long_descp_bn" class="form-control" required data-validation-required-message="This field is required">{!! $product->long_descp_bn !!}</textarea>
+                                    <textarea type="text" id="editor2" name="long_descp_bn" class="form-control" data-validation-required-message="This field is required">{!! $product->long_descp_bn !!}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                                           <p class="card-text">
                                             <div class="form-group">
                                                 <label class="form-control-label">Change Image <span class="tx-danger">*</span></label>
-                                                <input type="file" name="product_thumbnail"  onChange="mainThamUrl(this)" class="form-control" required data-validation-required-message="This field is required">
+                                                <input type="file" name="product_thumbnail"  onChange="mainThamUrl(this)" class="form-control" data-validation-required-message="This field is required">
                                             </div>
                                           </p>
                                           <img src="" id="mainThmb">

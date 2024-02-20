@@ -159,19 +159,23 @@ class IndexController extends Controller
         return view('frontend.tags.tags_view',compact('products','categories'));
     }
 
-    public function subCatWiseProduct($sub_cat_id,$slug){
-        $products = Product::where('status',1)->where('subcategory_id',$sub_cat_id)->orderBy('id','DESC')->paginate(1);
+    public function CatWiseProduct($cat_id,$slug){
+        $products = Product::where('status',1)->where('category_id',$cat_id)->orderBy('id','DESC')->paginate(10);
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.subcategory_view',compact('products','categories'));
+    }
+    public function GetAllProducts(){
+        $products = Product::where('status',1)->orderBy('id','DESC')->paginate(10);
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
 
         return view('frontend.product.subcategory_view',compact('products','categories'));
     }
-    public function childCatWiseProduct($child_sub_cat_id,$slug){
-        $products = Product::where('status',1)->where('childSubcategory_id',$child_sub_cat_id)->orderBy('id','DESC')->paginate(1);
-
+    public function BrandWiseProduct($brand_id,$slug){
+        $products = Product::where('status',1)->where('brand_id',$brand_id)->orderBy('id','DESC')->paginate(10);
         $categories = Category::orderBy('category_name_en','ASC')->get();
-
-        return view('frontend.product.childCatView',compact('products','categories'));
+        return view('frontend.product.subcategory_view',compact('products','categories'));
     }
 
     /// Product View With Ajax
@@ -192,4 +196,16 @@ class IndexController extends Controller
 		));
 
 	} // end method
+
+
+    public function SearchProduct(Request $request){
+        $query = $request->input('query');
+        $products = Product::where('product_name_en', 'like', '%' . $query . '%')
+            ->orWhere('long_descp_en', 'like', '%' . $query . '%')
+            ->orWhere('product_color_en', 'like', '%' . $query . '%')
+            ->paginate(10);
+
+            $categories = Category::orderBy('category_name_en','ASC')->get();
+            return view('frontend.product.subcategory_view',compact('products','categories','query'));
+    }
 }
