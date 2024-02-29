@@ -31,8 +31,8 @@ return new class extends Migration
             $table->string('product_size_bn')->nullable();
             $table->string('product_color_bn')->nullable();
             $table->string('product_color_en')->nullable();
-            $table->string('selling_price')->nullable();
-            $table->string('discount_price')->nullable();
+            $table->float('selling_price',10,2)->nullable();
+            $table->float('discount_price',10,2)->nullable();
             $table->string('short_descp_en')->nullable();
             $table->string('short_descp_bn')->nullable();
             $table->text('long_descp_en')->nullable();
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->integer('featured')->nullable();
             $table->integer('special_offer')->nullable();
             $table->integer('special_deals')->nullable();
-            $table->integer('status')->default(0)->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

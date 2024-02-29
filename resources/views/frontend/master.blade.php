@@ -424,7 +424,7 @@
         </td>
                 </tr>`
                     });
-                    console.log(rows);
+
                     $('#wishlist').html(rows);
                 }
             })
@@ -741,6 +741,8 @@
                 }
             });
         }
+
+
     </script>
 
     <script>

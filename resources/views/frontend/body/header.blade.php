@@ -20,16 +20,16 @@
           </div>
           <!-- /.cnt-account -->
 
-          <div class="cnt-block">
+          {{-- <div class="cnt-block">
             <ul class="list-unstyled list-inline">
-              {{-- <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
+              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">USD </span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">USD</a></li>
                   <li><a href="#">INR</a></li>
                   <li><a href="#">GBP</a></li>
                 </ul>
-              </li> --}}
-              {{-- <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Language </span><b class="caret"></b></a>
+              </li>
+              <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="value">Language </span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   @if(session()->get('language') == 'bangla')
                   <li><a href="{{ route('english.language') }}">English</a></li>
@@ -37,10 +37,10 @@
                   <li><a href="{{ route('bangla.language') }}">বাংলা</a></li>
                    @endif
                 </ul>
-              </li> --}}
+              </li>
             </ul>
             <!-- /.list-unstyled -->
-          </div>
+          </div> --}}
           <!-- /.cnt-cart -->
           <div class="clearfix"></div>
         </div>
@@ -64,8 +64,7 @@
             <!-- /.contact-row -->
             <!-- ============================================================= SEARCH AREA ============================================================= -->
             <div class="search-area">
-
-              <form action="{{ route('search') }}" method="GET">
+              <form method="get" action="{{ route('product.search') }}">
                 <div class="control-group">
                   {{-- <ul class="categories-filter animate-dropdown">
                     <li class="dropdown"> <a class="dropdown-toggle"  data-toggle="dropdown" href="category.html">Categories <b class="caret"></b></a>
@@ -78,9 +77,8 @@
                       </ul>
                     </li>
                   </ul> --}}
-                  <input class="search-field" placeholder="Search here..." name="query" value="{{ isset($query)?$query:'' }}"/>
-                  <button type="submit" class="search-button" ></button>
-                </div>
+                  <input class="search-field" placeholder="Search here..." name="search"/>
+                  <input type="submit" class="search-button" value="Search"/> </div>
               </form>
             </div>
             <!-- /.search-area -->
@@ -142,50 +140,50 @@
             <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
               <div class="nav-outer">
                 <ul class="nav navbar-nav">
-                  <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" >Home</a> </li>
-                    @php
-                        $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
-                    @endphp
-                  <li class="dropdown yamm mega-menu">
-                    <a href="{{ url('get/all-products') }}">ALL PRODUCTS</a>
+                    <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" >Home</a> </li>
+                      @php
+                          $categories = App\Models\Category::orderBy('category_name_en','ASC')->get();
+                      @endphp
+                    <li class="dropdown yamm mega-menu">
+                      <a href="{{ url('get/all-products') }}">ALL PRODUCTS</a>
 
-                  </li>
-                    @foreach($categories as $category)
-                  <li class="dropdown yamm mega-menu">
-                    <a href="{{ url('category/product/'.$category->id.'/'.$category->category_slug_en) }}">{{ $category->category_name_en }}</a>
+                    </li>
+                      @foreach($categories as $category)
+                    <li class="dropdown yamm mega-menu">
+                      <a href="{{ url('category/product/'.$category->id.'/'.$category->category_slug_en) }}">{{ $category->category_name_en }}</a>
 
-                  </li>
-                  @endforeach
+                    </li>
+                    @endforeach
 
-                  <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">BRANDS</a>
-                    <ul class="dropdown-menu container">
-                      <li>
-                        <div class="yamm-content ">
-                          <div class="row">
-                            @php
-                                $brands = App\Models\Brand::all();
-                            @endphp
+                    <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">BRANDS</a>
+                      <ul class="dropdown-menu container">
+                        <li>
+                          <div class="yamm-content ">
+                            <div class="row">
+                              @php
+                                  $brands = App\Models\Brand::all();
+                              @endphp
 
-                            @foreach($brands as $brand)
-                            <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                              <a href="{{ url('brand/product/'.$brand->id.'/'.$brand->brand_slug_en) }}" class="title">{{ $brand->brand_name_en }}</a>
+                              @foreach($brands as $brand)
+                              <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
+                                <a href="{{ url('brand/product/'.$brand->id.'/'.$brand->brand_slug_en) }}" class="title">{{ $brand->brand_name_en }}</a>
+                              </div>
+                              @endforeach
+                              <!-- /.col -->
+
+                              <!-- /.col -->
+
+                              <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="{{ asset('frontend/assets/images/banners/top-menu-banner.jpg') }}" alt=""> </div>
+                              <!-- /.yamm-content -->
                             </div>
-                            @endforeach
-                            <!-- /.col -->
-
-                            <!-- /.col -->
-
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image"> <img class="img-responsive" src="{{ asset('frontend/assets/images/banners/top-menu-banner.jpg') }}" alt=""> </div>
-                            <!-- /.yamm-content -->
                           </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
+                        </li>
+                      </ul>
+                    </li>
 
 
-                  <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
-                </ul>
+                    <li class="dropdown  navbar-right special-menu"> <a href="#">Todays offer</a> </li>
+                  </ul>
                 <!-- /.navbar-nav -->
                 <div class="clearfix"></div>
               </div>

@@ -12,9 +12,40 @@ use App\Models\Product;
 use App\Models\MultiImg;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Models\Review;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class IndexController extends Controller
 {
+    public function GetAllProducts(){
+        $products = Product::where('status',1)->orderBy('discount_price','ASC')->paginate(10);
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        $orderBy = "Lowest first";
+
+        return view('frontend.product.all_product_view',compact('products','categories','orderBy'));
+    }
+    public function GetAllProductsOrderBy($orderBy){
+        $order = '';
+        $field = '';
+        if($orderBy === 'Lowest first'){
+            $order = 'ASC';
+            $field = 'discount_price';
+        }
+        else if($orderBy === 'A to Z'){
+            $order = 'ASC';
+            $field = 'product_name_en';
+        }
+        else{
+            $order = 'DESC';
+            $field = 'discount_price';
+        }
+        $products = Product::where('status',1)->orderBy($field,$order)->paginate(10);
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+
+        return view('frontend.product.all_product_view',compact('products','categories','orderBy'));
+    }
     public function index(){
         $categories = Category::orderBy('category_name_en','ASC')->get();
         $sliders = Slider::where('status',1)->get();
@@ -28,65 +59,50 @@ class IndexController extends Controller
         $special_offer = array();
         $sub_array = array();
         $count = 0;
-        $index = 1;
 
         foreach($sproducts as $product){
             array_push($sub_array,$product);
             if($count == 2){
-                $count = 0;
+                $count = -1;
                 array_push($special_offer,$sub_array);
                 $sub_array = array();
-            }elseif($index == count($products)){
-                array_push($special_offer,$sub_array);
             }
 
             $count++;
-            $index++;
+        }
+        if(count($sub_array)>0){
+            array_push($special_offer,$sub_array);
+            $sub_array = array();
         }
 
         // constructing special deal data
         $special_deal = array();
         $count1 = 0;
-        $index1 = 1;
         foreach($dproducts as $product){
             array_push($sub_array,$product);
             if($count1 == 2){
-                $count1 = 0;
+                $count1 = -1;
                 array_push($special_deal,$sub_array);
                 $sub_array = array();
-            }elseif($index1 == count($products)){
-                array_push($special_deal,$sub_array);
             }
 
             $count1++;
-            $index1++;
         }
-
-        // $skip_category_one = Category::skip(1)->first();
-        // $skip_product_one = [];
-        // if($skip_category_one){
-        //     $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
-        // }
+        if(count($sub_array)>0){
+            array_push($special_deal,$sub_array);
+            $sub_array = array();
+        }
+        $skip_category_one = "";
+        $skip_product_one = [];
+        $skip_category_one = Category::skip(1)->first();
+        if($skip_category_one){
+            $skip_product_one = Product::where('status',1)->where('category_id',$skip_category_one->id)->orderBy('id','DESC')->get();
+        }
 
         // dd($special_deal);
         // $special_deal = [];
         // $special_offer = [];
-
-
-
-        // new arrival/hot_deals + exclusive/featured
-           $newArrivalProducts = Product::where('status',1)->where('hot_deals',1)->take(4)->get();
-           $newArrival = 'New Arrival';
-
-           $exclusiveProducts = Product::where('status',1)->where('featured',1)->take(4)->get();
-           $exclusive = 'Exclusive';
-
-
-
-
-
-        return view('frontend.index',compact('categories','sliders','products','special_offer','special_deal',
-                'newArrivalProducts','newArrival','exclusiveProducts','exclusive'));
+        return view('frontend.index',compact('categories','sliders','products','special_offer','special_deal','skip_product_one'));
     }
 
     public function UserLogout(){
@@ -94,6 +110,22 @@ class IndexController extends Controller
         return Redirect()->route('login');
 
     }
+
+
+    public function searchProduct(Request $request){
+        $search = $request->search;
+        $products = Product::where(function($query) use ($search){
+            $query->where('product_name_en','like',"%$search%");
+        })->where('status',1)->orderBy('id','DESC')->paginate(1);
+
+
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+
+        return view('frontend.product.subcategory_view',compact('products','categories'));
+    }
+
+
 
     public function UserProfile(){
         $id = Auth::user()->id;
@@ -150,6 +182,7 @@ class IndexController extends Controller
     }
 
     public function productDetail($id,$slug){
+
         $product = Product::findOrFail($id);
         $multiImgs = MultiImg::where('product_id',$id)->get();
         $products = Product::where('status',1)->get();
@@ -159,38 +192,114 @@ class IndexController extends Controller
 
         $related_product = Product::where('category_id',$product->category_id)->where('id','!=',$product->id)->get();
 
-        return view('frontend.product.product_detail',compact('products','product','multiImgs','product_color_en','product_size_en','related_product'));
+        $review = Review::groupBy('product_id')
+                        ->select('product_id',DB::raw('AVG(rating) as rating'))
+                        ->where('product_id',$id)
+                        ->first();
+
+        if(isset($review)){
+            $rating = intval($review->rating);
+        }else{
+            $rating = 0;
+        }
+
+
+        return view('frontend.product.product_detail',compact('products','product','multiImgs','product_color_en','product_size_en','related_product','rating'));
     }
 
     public function tagWiseProduct($tag){
-        // $products = DB::SELECT("SELECT * FROM PRODUCTS WHERE FIND_IN_SET('".$tag."',product_tags_en)");
+        //$products = DB::SELECT("SELECT * FROM PRODUCTS WHERE FIND_IN_SET('".$tag."',product_tags_en) ORDER BY selling_price ASC");
 
-        // return $products = Product::whereRaw("FIND_IN_SET('".$tag."',product_tags_en)")->select('*')->paginate(1);
-        $products = Product::where('status',1)->paginate(1);
-        // return $products->paginate(1);
+        $products = Product::where('status',1)->whereRaw("FIND_IN_SET('".$tag."',product_tags_en)")->orderBy('discount_price','asc')->paginate(10);
+        // $products = Product::where('status',1)->paginate(10);
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        $orderBy = "Lowest first";
+
+        return view('frontend.tags.tags_view',compact('products','categories','orderBy','tag'));
+    }
+
+    public function tagWiseProductOrderBy($tag,$orderBy="Lowest first"){
+        $order = '';
+        $field = '';
+        if($orderBy === 'Lowest first'){
+            $order = 'ASC';
+            $field = 'discount_price';
+        }
+        else if($orderBy === 'A to Z'){
+            $order = 'ASC';
+            $field = 'product_name_en';
+        }
+        else{
+            $order = 'DESC';
+            $field = 'discount_price';
+        }
+        $products = Product::where('status',1)->whereRaw("FIND_IN_SET('".$tag."',product_tags_en)")->orderBy($field,$order)->select('*')->paginate(10);
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
 
-        return view('frontend.tags.tags_view',compact('products','categories'));
+        return view('frontend.tags.tags_view',compact('products','categories','orderBy','tag'));
     }
 
     public function CatWiseProduct($cat_id,$slug){
-        $products = Product::where('status',1)->where('category_id',$cat_id)->orderBy('id','DESC')->paginate(10);
+        $products = Product::where('status',1)->where('category_id',$cat_id)->orderBy('discount_price','ASC')->paginate(10);
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
-        return view('frontend.product.subcategory_view',compact('products','categories'));
+        $orderBy = "Lowest first";
+
+        return view('frontend.product.subcategory_view',compact('products','categories','orderBy','cat_id','slug'));
     }
-    public function GetAllProducts(){
-        $products = Product::where('status',1)->orderBy('id','DESC')->paginate(10);
+    public function subCatWiseProductOrderBy($cat_id,$slug,$orderBy="Lowest first"){
+        $order = '';
+        $field = '';
+        if($orderBy === 'Lowest first'){
+            $order = 'ASC';
+            $field = 'discount_price';
+        }
+        else if($orderBy === 'A to Z'){
+            $order = 'ASC';
+            $field = 'product_name_en';
+        }
+        else{
+            $order = 'DESC';
+            $field = 'discount_price';
+        }
+        $products = Product::where('status',1)->where('category_id',$cat_id)->orderBy($field,$order)->paginate(10);
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
 
-        return view('frontend.product.subcategory_view',compact('products','categories'));
+
+        return view('frontend.product.subcategory_view',compact('products','categories','orderBy','cat_id','slug'));
     }
-    public function BrandWiseProduct($brand_id,$slug){
-        $products = Product::where('status',1)->where('brand_id',$brand_id)->orderBy('id','DESC')->paginate(10);
+    public function BrandWiseProduct($child_sub_cat_id,$slug){
+        $products = Product::where('status',1)->where('brand_id',$child_sub_cat_id)->orderBy('selling_price','ASC')->paginate(10);
+
         $categories = Category::orderBy('category_name_en','ASC')->get();
-        return view('frontend.product.subcategory_view',compact('products','categories'));
+        $orderBy = "Lowest first";
+
+        return view('frontend.product.childCatView',compact('products','categories','child_sub_cat_id','slug','orderBy'));
+    }
+
+    public function childCatWiseProductOrderBy($child_sub_cat_id,$slug,$orderBy){
+        $order = '';
+        $field = '';
+        if($orderBy === 'Lowest first'){
+            $order = 'ASC';
+            $field = 'discount_price';
+        }
+        else if($orderBy === 'A to Z'){
+            $order = 'ASC';
+            $field = 'product_name_en';
+        }
+        else{
+            $order = 'DESC';
+            $field = 'discount_price';
+        }
+        $products = Product::where('status',1)->where('brand_id',$child_sub_cat_id)->orderBy($field,$order)->paginate(10);
+
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+
+        return view('frontend.product.childCatView',compact('products','categories','child_sub_cat_id','slug','orderBy'));
     }
 
     /// Product View With Ajax
@@ -211,16 +320,4 @@ class IndexController extends Controller
 		));
 
 	} // end method
-
-
-    public function SearchProduct(Request $request){
-        $query = $request->input('query');
-        $products = Product::where('product_name_en', 'like', '%' . $query . '%')
-            ->orWhere('long_descp_en', 'like', '%' . $query . '%')
-            ->orWhere('product_color_en', 'like', '%' . $query . '%')
-            ->paginate(10);
-
-        $categories = Category::orderBy('category_name_en','ASC')->get();
-        return view('frontend.product.subcategory_view',compact('products','categories','query'));
-    }
 }

@@ -17,20 +17,17 @@ class BrandController extends Controller
     public function BrandStore(Request $request){
         $request->validate([
             'brand_name_en' => 'required',
-            // 'brand_name_ban' => 'required',
-            // 'brand_image' => 'required'
+            'brand_name_ban' => 'required',
+            'brand_image' => 'required'
         ],[
-            // 'brand_name_en.required' => 'Input Brand English Name required',
-            // 'brand_name_ban.required' => 'Input Brand Bangla Name required'
+            'brand_name_en.required' => 'Input Brand English Name required',
+            'brand_name_ban.required' => 'Input Brand Bangla Name required'
         ]);
 
         $image = $request->file('brand_image');
-        $save_url = "";
-        if($image){
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(300,300)->save('upload/brand'.$name_gen);
-            $save_url = 'upload/brand'.$name_gen;
-        }
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(300,300)->save('upload/brand'.$name_gen);
+        $save_url = 'upload/brand'.$name_gen;
 
         Brand::insert([
             'brand_name_en' => $request->brand_name_en,

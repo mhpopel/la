@@ -33,12 +33,6 @@ Tag Wise Product
           <div class="sidebar-module-container">
             <div class="sidebar-filter">
               <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
-
-
-
-
-
-
               {{-- <div class="sidebar-widget wow fadeInUp">
                 <h3 class="section-title">shop by</h3>
                 <div class="widget-header">
@@ -180,11 +174,11 @@ Tag Wise Product
             <div class="item">
               <div class="image"> <img src="{{ asset('frontend/assets/images/banners/cat-banner-1.jpg') }}" alt="" class="img-responsive"> </div>
               <div class="container-fluid">
-                <div class="caption vertical-top text-left">
-                  {{-- <div class="big-text"> Big Sale </div>
+                {{-- <div class="caption vertical-top text-left">
+                  <div class="big-text"> Big Sale </div>
                   <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                  <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div> --}}
-                </div>
+                  <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
+                </div> --}}
                 <!-- /.caption -->
               </div>
               <!-- /.container-fluid -->
@@ -205,26 +199,25 @@ Tag Wise Product
               </div>
               <!-- /.col -->
               <div class="col col-sm-12 col-md-6">
-                <div class="col col-sm-3 col-md-6 no-padding">
-                  {{-- <div class="lbl-cnt"> <span class="lbl">Sort by</span>
-                    <div class="fld inline">
-                      <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                        <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
-                        <ul role="menu" class="dropdown-menu">
-                          <li role="presentation"><a href="#">position</a></li>
-                          <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                          <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                          <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                        </ul>
+                <div class="col col-sm-3 col-md-7 no-padding">
+                    <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                        <div class="fld inline">
+                          <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
+                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> {{ $orderBy }} <span class="caret"></span> </button>
+                            <ul role="menu" class="dropdown-menu">
+                              <li role="presentation"><a href="{{ url('products/'.$tag.'/Lowest first') }}">Price:Lowest first</a></li>
+                              <li role="presentation"><a href="{{ url('products/'.$tag.'/Highest first') }}">Price:HIghest first</a></li>
+                              <li role="presentation"><a href="{{ url('products/'.$tag.'/A to Z') }}">Product Name:A to Z</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                        <!-- /.fld -->
                       </div>
-                    </div>
-                    <!-- /.fld -->
-                  </div> --}}
                   <!-- /.lbl-cnt -->
                 </div>
                 <!-- /.col -->
-                <div class="col col-sm-3 col-md-6 no-padding">
-                  {{-- <div class="lbl-cnt"> <span class="lbl">Show</span>
+                {{-- <div class="col col-sm-3 col-md-6 no-padding">
+                  <div class="lbl-cnt"> <span class="lbl">Show</span>
                     <div class="fld inline">
                       <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
                         <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> 1 <span class="caret"></span> </button>
@@ -243,9 +236,9 @@ Tag Wise Product
                       </div>
                     </div>
                     <!-- /.fld -->
-                  </div> --}}
+                  </div>
                   <!-- /.lbl-cnt -->
-                </div>
+                </div> --}}
                 <!-- /.col -->
               </div>
               <!-- /.col -->
@@ -261,14 +254,23 @@ Tag Wise Product
               <div class="tab-pane active " id="grid-container">
                 <div class="category-product">
                   <div class="row">
-                    @php
-                    $prodCount = count($products)
 
-                    @endphp
 
 
                     @foreach($products as $product)
-                    <div class="col-sm-6 col-md-4 wow fadeInUp">
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
+                    <div class="col-sm-6 col-md-4 wow fadeInUp" style="height: 450px!important;">
                       <div class="products">
                         <div class="product">
                           <div class="product-image">
@@ -289,7 +291,16 @@ Tag Wise Product
 
                           <div class="product-info text-left">
                             <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                            <div class="rating rateit-small"></div>
+                            <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                             <div class="description"></div>
                             <div class="product-price">
                                 @if($product->discount_price != NULL)
@@ -306,11 +317,11 @@ Tag Wise Product
                             <div class="action">
                               <ul class="list-unstyled">
                                 <li class="add-cart-button btn-group">
-                                  <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
-                                  <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-                                </li>
-                                <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                                    <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                                  </li>
+                                  <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" id="{{ $product->id }}" onclick="addToWishList(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                  {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
                               </ul>
                             </div>
                             <!-- /.action -->
@@ -327,11 +338,6 @@ Tag Wise Product
 
 
                     <!-- /.item -->
-                    @if($prodCount  == 0)
-                    <div class="col-sm-12 col-md-12 wow fadeInUp">
-                        <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
-                    </div>
-                    @endif
                   </div>
                   <!-- /.row -->
                 </div>
@@ -345,6 +351,18 @@ Tag Wise Product
 
 
                     @foreach($products as $product)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                   <div class="category-product-inner wow fadeInUp">
                     <div class="products">
                       <div class="product-list product">
@@ -359,7 +377,16 @@ Tag Wise Product
                           <div class="col col-sm-8 col-lg-8">
                             <div class="product-info">
                               <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                              <div class="rating rateit-small"></div>
+                              <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                               <div class="product-price">
                                 @if($product->discount_price != NULL)
                                 <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span>
@@ -407,11 +434,7 @@ Tag Wise Product
                   <!-- /.category-product-inner -->
 
                   @endforeach
-                  @if($prodCount  == 0)
-                  <div class="col-sm-12 col-md-12 wow fadeInUp">
-                      <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
-                  </div>
-                  @endif
+
                 </div>
                 <!-- /.category-product -->
               </div>
@@ -440,7 +463,44 @@ Tag Wise Product
       </div>
       <!-- /.row -->
       <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+      <div id="brands-carousel" class="logo-slider wow fadeInUp">
+        <div class="logo-slider-inner">
+          <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+            <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
 
+            <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+          </div>
+          <!-- /.owl-carousel #logo-slider -->
+        </div>
+        <!-- /.logo-slider-inner -->
+
+      </div>
       <!-- /.logo-slider -->
       <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
     <!-- /.container -->

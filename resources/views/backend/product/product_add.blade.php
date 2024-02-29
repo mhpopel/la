@@ -23,9 +23,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Brand Select </h5>
+                                <h5>Brand Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <select name="brand_id" id="select" class="form-control" >
+                                    <select name="brand_id" id="select" required="" class="form-control" >
                                         <option selected disabled>Select Brand</option>
                                         @foreach($brands as $brand)
                                         <option value="{{ $brand->id }}" >{{ $brand->brand_name_en }}</option>
@@ -36,9 +36,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Category Select </h5>
+                                <h5>Category Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <select name="category_id" id="select" class="form-control" >
+                                    <select name="category_id" id="select" required="" class="form-control" >
                                         <option value="" selected="" disabled>Select Category</option>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name_en }}</option>
@@ -49,9 +49,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Sub Category Select </h5>
+                                <h5>Sub Category Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <select name="subcategory_id" id="select" class="form-control" >
+                                    <select name="subcategory_id" id="select" required="" class="form-control" >
                                         <option value="" selected="" disabled>Select SubCategory</option>
 
                                     </select>
@@ -62,9 +62,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Child Sub Category Select </h5>
+                                <h5>Child Sub Category Select <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <select name="childSubcategory_id" id="select" class="form-control" >
+                                    <select name="childSubcategory_id" id="select" required="" class="form-control" >
                                         <option selected disabled>Select Child Sub Category</option>
                                     </select>
                                 </div>
@@ -72,97 +72,97 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Name En </h5>
+                                <h5>Product Name En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_en" class="form-control" data-validation-required-message="This field is"> </div>
+                                    <input type="text" name="product_name_en" class="form-control" required data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Name Bn </h5>
+                                <h5>Product Name Bn <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_name_bn" class="form-control" data-validation-required-message="This field is"> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <h5>Product Code </h5>
-                                <div class="controls">
-                                    <input type="text" name="product_code" class="form-control" data-validation-required-message="This field is">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <h5>Product Quantity </h5>
-                                <div class="controls">
-                                    <input type="text" name="product_qty" class="form-control" data-validation-required-message="This field is">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <h5>Product Tags En </h5>
-                                <div class="controls">
-                                    <input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is">
-                                </div>
+                                    <input type="text" name="product_name_bn" class="form-control" required data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Tags Bn </h5>
+                                <h5>Product Code <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_tags_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is">
+                                    <input type="text" name="product_code" class="form-control" required data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Size En </h5>
+                                <h5>Product Quantity <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_size_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is"> </div>
+                                    <input type="text" name="product_qty" class="form-control" required data-validation-required-message="This field is required">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Size Bn </h5>
+                                <h5>Product Tags En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_size_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is"> </div>
+                                    <input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required">
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Color En</h5>
+                                <h5>Product Tags Bn <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_color_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is">
+                                    <input type="text" name="product_tags_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Color Bn </h5>
+                                <h5>Product Size En <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="product_color_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" data-validation-required-message="This field is"> </div>
+                                    <input type="text" name="product_size_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Selling Price </h5>
+                                <h5>Product Size Bn <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="text" name="selling_price"  class="form-control" data-validation-required-message="This field is"> </div>
+                                    <input type="text" name="product_size_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Product Discount Price</h5>
+                                <h5>Product Color En<span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="product_color_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h5>Product Color Bn <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="product_color_bn" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput" required data-validation-required-message="This field is required"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h5>Product Selling Price <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="selling_price"  class="form-control" required data-validation-required-message="This field is required"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <h5>Product Discount Price<span class="text-danger">*</span></h5>
                                 <div class="controls">
                                     <input type="text" name="discount_price" class="form-control">
                                 </div>
@@ -170,18 +170,18 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Main Product Thumbnail </h5>
+                                <h5>Main Product Thumbnail <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="file" name="product_thumbnail" onChange="mainThamUrl(this)" class="form-control" data-validation-required-message="This field is">
+                                    <input type="file" name="product_thumbnail" onChange="mainThamUrl(this)" class="form-control" required data-validation-required-message="This field is required">
                                 </div>
                                 <img src="" id="mainThmb">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <h5>Multiple Image </h5>
+                                <h5>Multiple Image <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <input type="file" name="multi_img[]"  multiple="" id="multiImg" class="form-control" data-validation-required-message="This field is">
+                                    <input type="file" name="multi_img[]"  multiple="" id="multiImg" class="form-control" required data-validation-required-message="This field is required">
                                 </div>
                                 <div class="row" id="preview_img"></div>
                             </div>
@@ -190,17 +190,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Short Description En</h5>
+                                <h5>Short Description En<span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <textarea type="text" name="short_descp_en" class="form-control" data-validation-required-message="This field is"></textarea>
+                                    <textarea type="text" name="short_descp_en" class="form-control" required data-validation-required-message="This field is required"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Short Description Bn </h5>
+                                <h5>Short Description Bn <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <textarea type="text" name="short_descp_bn" class="form-control" data-validation-required-message="This field is"></textarea>
+                                    <textarea type="text" name="short_descp_bn" class="form-control" required data-validation-required-message="This field is required"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -208,17 +208,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Long Description En</h5>
+                                <h5>Long Description En<span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <textarea type="text" id="editor1" name="long_descp_en" class="form-control" data-validation-required-message="This field is"></textarea>
+                                    <textarea type="text" id="editor1" name="long_descp_en" class="form-control" required data-validation-required-message="This field is required"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <h5>Long Description Bn </h5>
+                                <h5>Long Description Bn <span class="text-danger">*</span></h5>
                                 <div class="controls">
-                                    <textarea type="text" id="editor2" name="long_descp_bn" class="form-control" data-validation-required-message="This field is"></textarea>
+                                    <textarea type="text" id="editor2" name="long_descp_bn" class="form-control" required data-validation-required-message="This field is required"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -233,11 +233,11 @@
                             <div class="controls">
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_2" value="1" name="hot_deals">
-                                    <label for="checkbox_2">New Arrival</label>
+                                    <label for="checkbox_2">Hot Deals</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_3" value="1" name="featured">
-                                    <label for="checkbox_3">Exclusive</label>
+                                    <label for="checkbox_3">Featured</label>
                                 </fieldset>
                                 <fieldset>
                                     <input type="checkbox" id="checkbox_4" value="1" name="status" >

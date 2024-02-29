@@ -31,12 +31,53 @@ Subcategory Product
           <!-- /.side-menu -->
           <!-- ================================== TOP NAVIGATION : END ================================== -->
           <div class="sidebar-module-container">
-
-
-
             <div class="sidebar-filter">
               <!-- ============================================== SIDEBAR CATEGORY ============================================== -->
+              {{-- <div class="sidebar-widget wow fadeInUp">
+                <h3 class="section-title">shop by</h3>
+                <div class="widget-header">
+                  <h4 class="widget-title">Category</h4>
+                </div>
+                <div class="sidebar-widget-body">
 
+
+                  <div class="accordion">
+
+
+                    @foreach($categories as $category)
+                    <div class="accordion-group">
+                      <div class="accordion-heading"> <a href="#collapse{{ $category->id }}" data-toggle="collapse" class="accordion-toggle collapsed">
+                         {{ $category->category_name_en }} </a>
+                        </div>
+                        @php
+                            $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
+                        @endphp
+
+                      <!-- /.accordion-heading -->
+                      <div class="accordion-body collapse" id="collapse{{ $category->id }}" style="height: 0px;">
+                        <div class="accordion-inner">
+
+                          <ul>
+                            @foreach($subcategories as $subcategory)
+                            <li><a href="#">{{ $subcategory->subcategory_name_en }}</a></li>
+                            @endforeach
+                          </ul>
+                        </div>
+                        <!-- /.accordion-inner -->
+                      </div>
+                      <!-- /.accordion-body -->
+                    </div>
+                    <!-- /.accordion-group -->
+
+                    @endforeach
+
+
+
+                  </div>
+                  <!-- /.accordion -->
+                </div>
+                <!-- /.sidebar-widget-body -->
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== SIDEBAR CATEGORY : END ============================================== -->
 
@@ -57,15 +98,55 @@ Subcategory Product
               <!-- /.sidebar-widget -->
               <!-- ============================================== PRICE SILDER : END ============================================== -->
               <!-- ============================================== MANUFACTURES============================================== -->
-
+              {{-- <div class="sidebar-widget wow fadeInUp">
+                <div class="widget-header">
+                  <h4 class="widget-title">Manufactures</h4>
+                </div>
+                <div class="sidebar-widget-body">
+                  <ul class="list">
+                    <li><a href="#">Forever 18</a></li>
+                    <li><a href="#">Nike</a></li>
+                    <li><a href="#">Dolce & Gabbana</a></li>
+                    <li><a href="#">Alluare</a></li>
+                    <li><a href="#">Chanel</a></li>
+                    <li><a href="#">Other Brand</a></li>
+                  </ul>
+                  <!--<a href="#" class="lnk btn btn-primary">Show Now</a>-->
+                </div>
+                <!-- /.sidebar-widget-body -->
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== MANUFACTURES: END ============================================== -->
               <!-- ============================================== COLOR============================================== -->
-
+              {{-- <div class="sidebar-widget wow fadeInUp">
+                <div class="widget-header">
+                  <h4 class="widget-title">Colors</h4>
+                </div>
+                <div class="sidebar-widget-body">
+                  <ul class="list">
+                    <li><a href="#">Red</a></li>
+                    <li><a href="#">Blue</a></li>
+                    <li><a href="#">Yellow</a></li>
+                    <li><a href="#">Pink</a></li>
+                    <li><a href="#">Brown</a></li>
+                    <li><a href="#">Teal</a></li>
+                  </ul>
+                </div>
+                <!-- /.sidebar-widget-body -->
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== COLOR: END ============================================== -->
               <!-- ============================================== COMPARE============================================== -->
-
+              {{-- <div class="sidebar-widget wow fadeInUp outer-top-vs">
+                <h3 class="section-title">Compare products</h3>
+                <div class="sidebar-widget-body">
+                  <div class="compare-report">
+                    <p>You have no <span>item(s)</span> to compare</p>
+                  </div>
+                  <!-- /.compare-report -->
+                </div>
+                <!-- /.sidebar-widget-body -->
+              </div> --}}
               <!-- /.sidebar-widget -->
               <!-- ============================================== COMPARE: END ============================================== -->
               <!-- ============================================== PRODUCT TAGS ============================================== -->
@@ -118,25 +199,24 @@ Subcategory Product
               </div>
               <!-- /.col -->
               <div class="col col-sm-12 col-md-6">
-                <div class="col col-sm-3 col-md-6 no-padding">
-                  {{-- <div class="lbl-cnt"> <span class="lbl">Sort by</span>
+                <div class="col col-sm-3 col-md-7 no-padding">
+                  <div class="lbl-cnt"> <span class="lbl">Sort by</span>
                     <div class="fld inline">
-                      <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
-                        <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> Position <span class="caret"></span> </button>
-                        <ul role="menu" class="dropdown-menu">
-                          <li role="presentation"><a href="#">position</a></li>
-                          <li role="presentation"><a href="#">Price:Lowest first</a></li>
-                          <li role="presentation"><a href="#">Price:HIghest first</a></li>
-                          <li role="presentation"><a href="#">Product Name:A to Z</a></li>
-                        </ul>
-                      </div>
+                        <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
+                            <button data-toggle="dropdown" type="button" class="btn dropdown-toggle"> {{ $orderBy }} <span class="caret"></span> </button>
+                            <ul role="menu" class="dropdown-menu">
+                              <li role="presentation"><a href="{{ url('products/'.$cat_id.'/'.$slug.'/Lowest first') }}">Price:Lowest first</a></li>
+                              <li role="presentation"><a href="{{ url('products/'.$cat_id.'/'.$slug.'/Highest first') }}">Price:HIghest first</a></li>
+                              <li role="presentation"><a href="{{ url('products/'.$cat_id.'/'.$slug.'/A to Z') }}">Product Name:A to Z</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- /.fld -->
-                  </div> --}}
+                  </div>
                   <!-- /.lbl-cnt -->
                 </div>
                 <!-- /.col -->
-                {{-- <div class="col col-sm-3 col-md-6 no-padding">
+                {{-- <div class="col col-sm-3 col-md-5 no-padding">
                   <div class="lbl-cnt"> <span class="lbl">Show</span>
                     <div class="fld inline">
                       <div class="dropdown dropdown-small dropdown-med dropdown-white inline">
@@ -175,15 +255,24 @@ Subcategory Product
                 <div class="category-product">
                   <div class="row">
 
-                    @php
-                    $prodCount = count($products)
 
-                    @endphp
+
                     @foreach($products as $product)
-                    <div class="col-sm-6 col-md-4 wow fadeInUp">
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
+                    <div class="col-sm-6 col-md-4 wow fadeInUp" style="height: 450px!important;">
                       <div class="products">
                         <div class="product">
-
                           <div class="product-image">
                             <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}"><img  src="{{ asset($product->product_thumbnail) }}"></a> </div>
                             <!-- /.image -->
@@ -202,7 +291,16 @@ Subcategory Product
 
                           <div class="product-info text-left">
                             <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                            <div class="rating rateit-small"></div>
+                            <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                             <div class="description"></div>
                             <div class="product-price">
                                 @if($product->discount_price != NULL)
@@ -222,8 +320,8 @@ Subcategory Product
                                   <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
                                   <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                 </li>
-                                <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" id="{{ $product->id }}" onclick="addToWishList(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
                               </ul>
                             </div>
                             <!-- /.action -->
@@ -238,11 +336,7 @@ Subcategory Product
                     <!-- /.item -->
                     @endforeach
 
-                    @if($prodCount  == 0)
-                    <div class="col-sm-12 col-md-12 wow fadeInUp">
-                        <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
-                    </div>
-                    @endif
+
                     <!-- /.item -->
                   </div>
                   <!-- /.row -->
@@ -257,6 +351,18 @@ Subcategory Product
 
 
                     @foreach($products as $product)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                   <div class="category-product-inner wow fadeInUp">
                     <div class="products">
                       <div class="product-list product">
@@ -271,7 +377,16 @@ Subcategory Product
                           <div class="col col-sm-8 col-lg-8">
                             <div class="product-info">
                               <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                              <div class="rating rateit-small"></div>
+                              <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                               <div class="product-price">
                                 @if($product->discount_price != NULL)
                                 <span class="price"> ${{ $product->discount_price }} </span> <span class="price-before-discount">$ {{ $product->selling_price }}</span>
@@ -288,8 +403,8 @@ Subcategory Product
                                       <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
                                       <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                     </li>
-                                    <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                    <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
+                                    <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" id="{{ $product->id }}" onclick="addToWishList(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                    {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li> --}}
                                   </ul>
                                 </div>
                                 <!-- /.action -->
@@ -321,11 +436,6 @@ Subcategory Product
                   @endforeach
 
                 </div>
-                @if($prodCount  == 0)
-                <div class="col-sm-12 col-md-12 wow fadeInUp">
-                    <h2 style="font-weight: bolder; opacity:.7;">No Product Found!</h2>
-                </div>
-                @endif
                 <!-- /.category-product -->
               </div>
               <!-- /.tab-pane #list-container -->
@@ -353,7 +463,44 @@ Subcategory Product
       </div>
       <!-- /.row -->
       <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+      <div id="brands-carousel" class="logo-slider wow fadeInUp">
+        <div class="logo-slider-inner">
+          <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+            <div class="item m-t-15"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
 
+            <div class="item m-t-10"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+
+            <div class="item"> <a href="#" class="image"> <img data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a> </div>
+            <!--/.item-->
+          </div>
+          <!-- /.owl-carousel #logo-slider -->
+        </div>
+        <!-- /.logo-slider-inner -->
+
+      </div>
       <!-- /.logo-slider -->
       <!-- ============================================== BRANDS CAROUSEL : END ============================================== --> </div>
     <!-- /.container -->

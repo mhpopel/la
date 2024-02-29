@@ -17,7 +17,7 @@ Online Shop
           <!-- ================================== TOP NAVIGATION : END ================================== -->
 
           <!-- ============================================== HOT DEALS ============================================== -->
-            {{-- @include('frontend.common.hot_deals') --}}
+            @include('frontend.common.hot_deals')
           <!-- ============================================== HOT DEALS: END ============================================== -->
 
           <!-- ============================================== SPECIAL OFFER ============================================== -->
@@ -32,6 +32,18 @@ Online Shop
                   <div class="products special-product">
 
                     @foreach($sproducts as $product)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                     <div class="product">
                       <div class="product-micro">
                         <div class="row product-micro-row">
@@ -47,7 +59,16 @@ Online Shop
                           <div class="col col-xs-7">
                             <div class="product-info">
                               <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                              <div class="rating rateit-small"></div>
+                                <div class="">
+                                    @for($i=0; $i<5; $i++)
+                                        <i class="fa-solid fa fa-star"></i>
+                                    @endfor
+                                </div>
+                                <div class="" style="position: relative; top:-18.5px;">
+                                    @for($i=0; $i<$rating; $i++)
+                                        <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                    @endfor
+                                </div>
                               <div class="product-price">
                                 @if($product->discount_price != NULL)
                                 <span class="price"> {{ $product->discount_price }} </span>
@@ -87,7 +108,7 @@ Online Shop
           <!-- ============================================== PRODUCT TAGS : END ============================================== -->
           <!-- ============================================== SPECIAL DEALS ============================================== -->
 
-          {{-- <div class="sidebar-widget outer-bottom-small wow fadeInUp">
+          <div class="sidebar-widget outer-bottom-small wow fadeInUp">
             <h3 class="section-title">Special Deals</h3>
             <div class="sidebar-widget-body outer-top-xs">
               <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
@@ -97,6 +118,18 @@ Online Shop
                   <div class="products special-product">
 
                     @foreach($dproducts as $product)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                     <div class="product">
                       <div class="product-micro">
                         <div class="row product-micro-row">
@@ -112,7 +145,18 @@ Online Shop
                           <div class="col col-xs-7">
                             <div class="product-info">
                               <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                              <div class="rating rateit-small"></div>
+
+
+                                <div class="">
+                                    @for($i=0; $i<5; $i++)
+                                        <i class="fa-solid fa fa-star"></i>
+                                    @endfor
+                                </div>
+                                <div class="" style="position: relative; top:-18.5px;">
+                                    @for($i=0; $i<$rating; $i++)
+                                        <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                    @endfor
+                                </div>
                               <div class="product-price">
                                 @if($product->discount_price != NULL)
                                 <span class="price"> {{ $product->discount_price }} </span>
@@ -139,7 +183,7 @@ Online Shop
               </div>
             </div>
             <!-- /.sidebar-widget-body -->
-          </div> --}}
+          </div>
           <!-- /.sidebar-widget -->
           <!-- ============================================== SPECIAL DEALS : END ============================================== -->
           <!-- ============================================== NEWSLETTER ============================================== -->
@@ -179,12 +223,12 @@ Online Shop
                 @foreach($sliders as $slider)
               <div class="item" style="background-image: url({{ $slider->slider_img }});">
                 <div class="container-fluid">
-                  {{-- <div class="caption bg-color vertical-center text-left">
-                    <div class="slider-header fadeInDown-1">Top Brands</div>
+                  <div class="caption bg-color vertical-center text-left">
+                    {{-- <div class="slider-header fadeInDown-1">Top Brands</div>
                     <div class="big-text fadeInDown-1"> {{ $slider->title }} </div>
                     <div class="excerpt fadeInDown-2 hidden-xs"> <span>{{ $slider->description }}</span> </div>
-                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
-                  </div> --}}
+                    <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div> --}}
+                  </div>
                   <!-- /.caption -->
                 </div>
                 <!-- /.container-fluid -->
@@ -270,6 +314,18 @@ Online Shop
 
 
                     @foreach($products as $product)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                     <div class="item item-carousel">
                       <div class="products">
                         <div class="product">
@@ -290,7 +346,16 @@ Online Shop
 
                           <div class="product-info text-left">
                             <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-                            <div class="rating rateit-small"></div>
+                            <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                             <div class="description"></div>
                             <div class="product-price">
                                 @if($product->discount_price != NULL)
@@ -312,7 +377,7 @@ Online Shop
                                   <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                 </li>
                                 <li class="lnk wishlist"> <a data-toggle="tooltip" class="add-to-cart" id="{{ $product->id }}" onclick="addToWishList(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                {{-- <li class="lnk"> <button data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </button> </li> --}}
+                                {{-- <li class="lnk"> <a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
                               </ul>
                             </div>
                             <!-- /.action -->
@@ -358,6 +423,18 @@ Online Shop
                   <div class="owl-carousel home-owl-carousel custom-carousel owl-theme">
                     @foreach($products as $product)
                     @if($product->category_id == $category->id)
+                    @php
+                        $review = App\Models\Review::groupBy('product_id')
+                                ->select('product_id',DB::raw('AVG(rating) as rating'))
+                                ->where('product_id',$product->id)
+                                ->first();
+
+                        if(isset($review)){
+                            $rating = intval($review->rating);
+                        }else{
+                            $rating = 0;
+                        }
+                    @endphp
                     <div class="item item-carousel">
                       <div class="products">
                         <div class="product">
@@ -379,7 +456,16 @@ Online Shop
 
                           <div class="product-info text-left">
                             <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }} }}">{{ $product->product_name_en }}</a></h3>
-                            <div class="rating rateit-small"></div>
+                            <div class="">
+                                @for($i=0; $i<5; $i++)
+                                    <i class="fa-solid fa fa-star"></i>
+                                @endfor
+                            </div>
+                            <div class="" style="position: relative; top:-18.5px;">
+                                @for($i=0; $i<$rating; $i++)
+                                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                @endfor
+                            </div>
                             <div class="description"></div>
                             <div class="product-price">
                                 @if($product->discount_price != NULL)
@@ -399,8 +485,8 @@ Online Shop
                                   <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)"> <i class="fa fa-shopping-cart"></i> </button>
                                   <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                                 </li>
-                                <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                                <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                                <li class="lnk wishlist"> <a class="add-to-cart" style="cursor: pointer;" id="{{ $product->id }}" onclick="addToWishList(this.id)" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                                {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
                               </ul>
                             </div>
                             <!-- /.action -->
@@ -457,9 +543,22 @@ Online Shop
           <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
           <!-- ============================================== FEATURED PRODUCTS ============================================== -->
           <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">{{ $newArrival }} products</h3>
+            <h3 class="section-title">Featured products</h3>
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                @foreach($newArrivalProducts as $product)
+                @foreach($products as $product)
+                @if($product->featured == 1)
+                @php
+                    $review = App\Models\Review::groupBy('product_id')
+                            ->select('product_id',DB::raw('AVG(rating) as rating'))
+                            ->where('product_id',$product->id)
+                            ->first();
+
+                    if(isset($review)){
+                        $rating = intval($review->rating);
+                    }else{
+                        $rating = 0;
+                    }
+                @endphp
               <div class="item item-carousel">
                 <div class="products">
                   <div class="product">
@@ -481,7 +580,16 @@ Online Shop
 
                     <div class="product-info text-left">
                       <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }} }}">{{ $product->product_name_en }}</a></h3>
-                      <div class="rating rateit-small"></div>
+                      <div class="">
+                        @for($i=0; $i<5; $i++)
+                            <i class="fa-solid fa fa-star"></i>
+                        @endfor
+                    </div>
+                    <div class="" style="position: relative; top:-18.5px;">
+                        @for($i=0; $i<$rating; $i++)
+                            <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                        @endfor
+                    </div>
                       <div class="description"></div>
                       <div class="product-price">
                         @if($product->discount_price != NULL)
@@ -502,7 +610,7 @@ Online Shop
                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                           </li>
                           <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
-                          <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                          {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
                         </ul>
                       </div>
                       <!-- /.action -->
@@ -514,7 +622,7 @@ Online Shop
                 </div>
                 <!-- /.products -->
               </div>
-
+              @endif
               @endforeach
               <!-- /.item -->
               <!-- /.item -->
@@ -524,9 +632,21 @@ Online Shop
 
 
           <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">{{ $exclusive }} products</h3>
+            <h3 class="section-title">Electronics products</h3>
             <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
-                @foreach($exclusiveProducts as $product)
+                @foreach($skip_product_one as $product)
+                @php
+                    $review = App\Models\Review::groupBy('product_id')
+                            ->select('product_id',DB::raw('AVG(rating) as rating'))
+                            ->where('product_id',$product->id)
+                            ->first();
+
+                    if(isset($review)){
+                        $rating = intval($review->rating);
+                    }else{
+                        $rating = 0;
+                    }
+                @endphp
 
               <div class="item item-carousel">
                 <div class="products">
@@ -549,7 +669,16 @@ Online Shop
 
                     <div class="product-info text-left">
                       <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }} }}">{{ $product->product_name_en }}</a></h3>
-                      <div class="rating rateit-small"></div>
+                      <div class="">
+                        @for($i=0; $i<5; $i++)
+                            <i class="fa-solid fa fa-star"></i>
+                        @endfor
+                    </div>
+                    <div class="" style="position: relative; top:-18.5px;">
+                        @for($i=0; $i<$rating; $i++)
+                            <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                        @endfor
+                    </div>
                       <div class="description"></div>
                       <div class="product-price">
                         @if($product->discount_price != NULL)
@@ -570,7 +699,7 @@ Online Shop
                             <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                           </li>
                           <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
-                          <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                          {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
                         </ul>
                       </div>
                       <!-- /.action -->

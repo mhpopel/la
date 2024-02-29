@@ -109,15 +109,25 @@ Product Detail
 							<h1 class="name" id="pname">{{ $product->product_name_en }}</h1>
 
 							<div class="rating-reviews m-t-20">
-								<div class="row">
-									<div class="col-sm-3">
-										<div class="rating rateit-small"></div>
+								<div class="row" style="padding-left: 15px;">
+									<div class="col-6">
+										{{-- <div class="rating rateit-small"></div> --}}
+                                        @for($i=0; $i<5; $i++)
+                                        <i class="fa-solid fa fa-star"></i>
+                                        @endfor
+
+
 									</div>
-									<div class="col-sm-8">
+									<div class="col-6" style="position: relative; top:-18.5px;">
+										@for($i=0; $i<$rating; $i++)
+                                        <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                                        @endfor
+									</div>
+									{{-- <div class="col-sm-8">
 										<div class="reviews">
 											<a href="#" class="lnk">(13 Reviews)</a>
 										</div>
-									</div>
+									</div> --}}
 								</div><!-- /.row -->
 							</div><!-- /.rating-reviews -->
 
@@ -130,7 +140,11 @@ Product Detail
 									</div>
 									<div class="col-sm-9">
 										<div class="stock-box">
+                                            @if($product->product_qty > 0)
 											<span class="value">In Stock</span>
+                                            @else
+                                            <span class="value">Stock Out</span>
+                                            @endif
 										</div>
 									</div>
 								</div><!-- /.row -->
@@ -248,7 +262,7 @@ Product Detail
 							<ul id="product-tabs" class="nav nav-tabs nav-tab-cell">
 								<li class="active"><a data-toggle="tab" href="#description">DESCRIPTION</a></li>
 								<li><a data-toggle="tab" href="#review">REVIEW</a></li>
-								<li><a data-toggle="tab" href="#tags">TAGS</a></li>
+								{{-- <li><a data-toggle="tab" href="#tags">TAGS</a></li> --}}
 							</ul><!-- /.nav-tabs #product-tabs -->
 						</div>
 						<div class="col-sm-9">
@@ -267,63 +281,71 @@ Product Detail
 										<div class="product-reviews">
 											<h4 class="title">Customer Reviews</h4>
 
-											<div class="reviews">
+											{{-- <div class="reviews">
 												<div class="review">
 													<div class="review-title"><span class="summary">We love this product</span><span class="date"><i class="fa fa-calendar"></i><span>1 days ago</span></span></div>
 													<div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit.Aliquam suscipit."</div>
 																										</div>
 
-											</div><!-- /.reviews -->
+											</div><!-- /.reviews --> --}}
 										</div><!-- /.product-reviews -->
 
 
 
 										<div class="product-add-review">
-											<h4 class="title">Write your own review</h4>
+											{{-- <h4 class="title">Write your own review</h4> --}}
 											<div class="review-table">
 												<div class="table-responsive">
-													<table class="table">
-														<thead>
-															<tr>
-																<th class="cell-label">&nbsp;</th>
-																<th>1 star</th>
-																<th>2 stars</th>
-																<th>3 stars</th>
-																<th>4 stars</th>
-																<th>5 stars</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td class="cell-label">Quality</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Price</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-															<tr>
-																<td class="cell-label">Value</td>
-																<td><input type="radio" name="quality" class="radio" value="1"></td>
-																<td><input type="radio" name="quality" class="radio" value="2"></td>
-																<td><input type="radio" name="quality" class="radio" value="3"></td>
-																<td><input type="radio" name="quality" class="radio" value="4"></td>
-																<td><input type="radio" name="quality" class="radio" value="5"></td>
-															</tr>
-														</tbody>
-													</table><!-- /.table .table-bordered -->
+                                                    <form action="{{ route('review.store') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="cell-label">&nbsp;</th>
+                                                                    <th>1 star</th>
+                                                                    <th>2 stars</th>
+                                                                    <th>3 stars</th>
+                                                                    <th>4 stars</th>
+                                                                    <th>5 stars</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="cell-label">Quality</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr>
+                                                                {{-- <tr>
+                                                                    <td class="cell-label">Price</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="cell-label">Value</td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="1"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="2"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="3"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="4"></td>
+                                                                    <td><input type="radio" name="quality" class="radio" value="5"></td>
+                                                                </tr> --}}
+                                                            </tbody>
+
+                                                        </table><!-- /.table .table-bordered -->
+                                                        <div class="action text-right">
+                                                            <button type="submit" class="btn btn-primary btn-upper">SUBMIT REVIEW</button>
+                                                        </div>
+                                                    </form>
 												</div><!-- /.table-responsive -->
 											</div><!-- /.review-table -->
 
-											<div class="review-form">
+											{{-- <div class="review-form">
 												<div class="form-container">
 													<form role="form" class="cnt-form">
 
@@ -353,7 +375,7 @@ Product Detail
 
 													</form><!-- /.cnt-form -->
 												</div><!-- /.form-container -->
-											</div><!-- /.review-form -->
+											</div><!-- /.review-form --> --}}
 
 										</div><!-- /.product-add-review -->
 
@@ -400,6 +422,19 @@ Product Detail
 
 
         @foreach($related_product as $product)
+
+        @php
+                $review = App\Models\Review::groupBy('product_id')
+                        ->select('product_id',DB::raw('AVG(rating) as rating'))
+                        ->where('product_id',$product->id)
+                        ->first();
+
+                if(isset($review)){
+                    $rating = intval($review->rating);
+                }else{
+                    $rating = 0;
+                }
+        @endphp
 		<div class="item item-carousel">
 			<div class="products">
 
@@ -423,7 +458,16 @@ Product Detail
 
 		<div class="product-info text-left">
 			<h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a></h3>
-			<div class="rating rateit-small"></div>
+			<div class="">
+                @for($i=0; $i<5; $i++)
+                    <i class="fa-solid fa fa-star"></i>
+                @endfor
+            </div>
+			<div class="" style="position: relative; top:-18.5px;">
+                @for($i=0; $i<$rating; $i++)
+                    <i class="fa-solid fa fa-star" style="color:yellow;"></i>
+                @endfor
+            </div>
 			<div class="description"></div>
 
 			<div class="product-price">
@@ -442,24 +486,11 @@ Product Detail
 				<div class="action">
 					<ul class="list-unstyled">
 						<li class="add-cart-button btn-group">
-							<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-								<i class="fa fa-shopping-cart"></i>
-							</button>
-							<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-
-						</li>
-
-		                <li class="lnk wishlist">
-							<a class="add-to-cart" href="detail.html" title="Wishlist">
-								 <i class="icon fa fa-heart"></i>
-							</a>
-						</li>
-
-						<li class="lnk">
-							<a class="add-to-cart" href="detail.html" title="Compare">
-							    <i class="fa fa-signal"></i>
-							</a>
-						</li>
+                            <button class="btn btn-primary icon" data-toggle="modal" data-target="#exampleModal" id="{{ $product->id }}" onclick="productView(this.id)" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                            <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <button class="btn btn-primary icon" type="button" title="Wishlist" id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i class="fa fa-heart"></i> </button>
+                        {{-- <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li> --}}
 					</ul>
 				</div><!-- /.action -->
 			</div><!-- /.cart -->

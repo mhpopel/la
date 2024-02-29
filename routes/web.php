@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\AllUserController;
@@ -160,13 +161,20 @@ Route::prefix('slider')->group(function(){
 
 
 // frontend all routes
+Route::get('/get/all-products',[IndexController::class, 'GetAllProducts']);
+Route::get('/category/product/{cat_id}/{slug}',[IndexController::class, 'CatWiseProduct']);
+Route::get('/brand/product/{brand_id}/{slug}',[IndexController::class, 'BrandWiseProduct']);
+Route::get('/products/{order}',[IndexController::class, 'GetAllProductsOrderBy']);
 Route::get('/language/bangla',[LanguageController::class, 'bangla'])->name('bangla.language');
 Route::get('/language/english',[LanguageController::class, 'english'])->name('english.language');
 Route::get('/product/details/{id}/{slug}',[IndexController::class, 'productDetail']);
+Route::get('/search',[IndexController::class, 'searchProduct'])->name('product.search');
 Route::get('/product/details/{tag}',[IndexController::class, 'tagWiseProduct']);
-Route::get('/category/product/{cat_id}/{slug}',[IndexController::class, 'CatWiseProduct']);
-Route::get('/get/all-products',[IndexController::class, 'GetAllProducts']);
-Route::get('/brand/product/{brand_id}/{slug}',[IndexController::class, 'BrandWiseProduct']);
+Route::get('/subcategory/product/{sub_cat_id}/{slug}',[IndexController::class, 'subCatWiseProduct']);
+Route::get('/products/{sub_cat_id}/{slug}/{order}',[IndexController::class, 'subCatWiseProductOrderBy']);
+Route::get('/child_subcategory/product/{child_sub_cat_id}/{slug}',[IndexController::class, 'childCatWiseProduct']);
+Route::get('/products/{child_sub_cat_id}/{slug}/{order}',[IndexController::class, 'childCatWiseProductOrderBy']);
+Route::get('/products/{tag}/{order}',[IndexController::class, 'tagWiseProductOrderBy']);
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/product/mini/cart', [CartController::class, 'addMiniCart']);
@@ -182,10 +190,10 @@ Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'Use
     Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
     Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
     Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+    Route::post('/create/review',[ReviewController::class,'StoreReview'])->name('review.store');
 
 });
 Route::get('/user/product/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
-Route::get('/user/product/search', [IndexController::class, 'SearchProduct'])->name('search');
 Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
 Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
 Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
